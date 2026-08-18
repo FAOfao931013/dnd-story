@@ -1,0 +1,242 @@
+{
+  "id": "intro-quest",
+  "title": "雾镇的失踪事件",
+  "description": "在被薄雾笼罩的小镇上，人们开始无故失踪。你受雇调查这背后的真相。",
+  "startSceneId": "hook_tavern",
+  "scenes": [
+    {
+      "id": "hook_tavern",
+      "type": "narration",
+      "title": "雾中的委托",
+      "text": "黄昏时分，你坐在雾镇唯一的酒馆里。外头的雾像一层潮湿的幕布，把世界与小镇隔开。一个神情紧绷的镇长走到你桌前，压低声音，向你讲述最近的失踪事件。",
+      "options": [
+        {
+          "id": "ask_details",
+          "label": "详细盘问失踪者的情况",
+          "nextSceneId": "investigate_mayor"
+        },
+        {
+          "id": "observe_tavern",
+          "label": "环顾酒馆，观察其他人的反应",
+          "check": {
+            "ability": "wis",
+            "skillTag": "观察敏锐",
+            "difficulty": "normal",
+            "onSuccess": "tavern_clue_success",
+            "onFailure": "tavern_clue_failure"
+          }
+        }
+      ]
+    },
+    {
+      "id": "investigate_mayor",
+      "type": "narration",
+      "title": "镇长的秘密",
+      "text": "镇长支支吾吾，似乎隐藏着什么。他提到失踪者多半是在夜晚最后一次出现在旧码头附近。",
+      "options": [
+        {
+          "id": "go_dock",
+          "label": "前往旧码头调查",
+          "nextSceneId": "dock_night"
+        }
+      ]
+    },
+    {
+      "id": "tavern_clue_success",
+      "type": "narration",
+      "title": "异样的视线",
+      "text": "你注意到角落里有个披着斗篷的人，在你与镇长交谈时始终用灰色的眼睛盯着你们，眼神躲闪。",
+      "options": [
+        {
+          "id": "approach_figure",
+          "label": "上前与那人交谈",
+          "nextSceneId": "cloak_figure"
+        }
+      ]
+    },
+    {
+      "id": "tavern_clue_failure",
+      "type": "narration",
+      "title": "平静的酒馆",
+      "text": "你扫视四周，却只看到疲惫的镇民、半空的木杯和懒洋洋的炉火。也许是你太多心了。",
+      "options": [
+        {
+          "id": "go_dock_anyway",
+          "label": "不再犹豫，前往旧码头",
+          "nextSceneId": "dock_night"
+        }
+      ]
+    },
+    {
+      "id": "cloak_figure",
+      "type": "narration",
+      "title": "斗篷下的恐惧",
+      "text": "那人瑟缩着身体，小声说他曾在雾中的码头看到水面下有什么东西在“注视”人类，并告诉你一条隐秘的小路通往码头后方的岩洞。",
+      "options": [
+        {
+          "id": "take_secret_path",
+          "label": "沿着他指引的隐秘小路前往码头",
+          "nextSceneId": "dock_night_backway"
+        }
+      ]
+    },
+    {
+      "id": "dock_night",
+      "type": "narration",
+      "title": "旧码头的浓雾",
+      "text": "夜色降临，旧码头被更浓的雾包裹。木板吱呀作响，远处的水声像什么东西在缓慢呼吸。",
+      "options": [
+        {
+          "id": "call_out",
+          "label": "高声呼喊，看是否有人回应",
+          "check": {
+            "ability": "cha",
+            "skillTag": "说服",
+            "difficulty": "easy",
+            "onSuccess": "dock_response",
+            "onFailure": "dock_echo"
+          }
+        },
+        {
+          "id": "search_quietly",
+          "label": "悄悄搜索码头",
+          "check": {
+            "ability": "dex",
+            "skillTag": "潜行",
+            "difficulty": "normal",
+            "onSuccess": "dock_tracks",
+            "onFailure": "dock_noise"
+          }
+        }
+      ]
+    },
+    {
+      "id": "dock_night_backway",
+      "type": "narration",
+      "title": "岩洞后的月光",
+      "text": "你沿着隐秘小路来到码头后方的岩洞入口。这里比正面的码头更安静，却隐约传来低声的吟唱。",
+      "options": [
+        {
+          "id": "sneak_in",
+          "label": "悄无声息地靠近吟唱声",
+          "nextSceneId": "ritual_cave"
+        }
+      ]
+    },
+    {
+      "id": "dock_response",
+      "type": "narration",
+      "title": "雾中的回应",
+      "text": "雾中传来一声急促的回应。一个受惊的年轻人从木桩后探出头来，他声称有人在洞穴里进行邪恶仪式。",
+      "options": [
+        {
+          "id": "follow_lead",
+          "label": "跟随年轻人的指引前往洞穴",
+          "nextSceneId": "ritual_cave"
+        }
+      ]
+    },
+    {
+      "id": "dock_echo",
+      "type": "narration",
+      "title": "回音与水声",
+      "text": "只有你自己的声音在雾中回荡。突然，水面溅起水花，你险些滑倒。",
+      "options": [
+        {
+          "id": "regain_composure",
+          "label": "稳住身形，继续向前探索",
+          "nextSceneId": "ritual_cave"
+        }
+      ]
+    },
+    {
+      "id": "dock_tracks",
+      "type": "narration",
+      "title": "奇怪的足迹",
+      "text": "你在湿润的木板上看到拖曳的水痕和奇怪的脚印，通往岩壁旁的一块暗门。",
+      "options": [
+        {
+          "id": "open_hidden_door",
+          "label": "打开暗门，进入下面的空间",
+          "nextSceneId": "ritual_cave"
+        }
+      ]
+    },
+    {
+      "id": "dock_noise",
+      "type": "narration",
+      "title": "响动惊扰了什么",
+      "text": "你脚下的木板发出一声巨响，远处的吟唱声瞬间停止。你感觉有视线从雾里投向你。",
+      "options": [
+        {
+          "id": "rush_forward",
+          "label": "不再隐藏，直接冲向声音来源",
+          "nextSceneId": "ritual_cave"
+        }
+      ]
+    },
+    {
+      "id": "ritual_cave",
+      "type": "narration",
+      "title": "仪式的终点",
+      "text": "洞穴中央，几名披着斗篷的人围绕着一口被雾气填满的井，低声吟唱。你知道，你的行动将决定雾镇的命运。",
+      "options": [
+        {
+          "id": "confront",
+          "label": "大声喝止他们，试图终止仪式",
+          "check": {
+            "ability": "cha",
+            "skillTag": "威吓",
+            "difficulty": "normal",
+            "onSuccess": "ending_banished",
+            "onFailure": "ending_partial"
+          }
+        },
+        {
+          "id": "sabotage_ritual",
+          "label": "悄悄破坏仪式道具",
+          "check": {
+            "ability": "int",
+            "skillTag": "奥秘",
+            "difficulty": "hard",
+            "onSuccess": "ending_controlled",
+            "onFailure": "ending_costly"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ending_banished",
+      "type": "ending",
+      "title": "驱散之声",
+      "endingTag": "守护者",
+      "text": "在你的喝止下，仪式失控，雾中的存在被强行撕裂驱散。雾镇得救了，但雾中最后的低语告诉你：它记住了你的名字。",
+      "options": []
+    },
+    {
+      "id": "ending_partial",
+      "type": "ending",
+      "title": "不完全的胜利",
+      "endingTag": "幸存者",
+      "text": "你打断了仪式，但为时已晚。雾中的存在已经触及现实。虽然失踪事件止住了，偶尔仍有人在夜里听到井中的低语。",
+      "options": []
+    },
+    {
+      "id": "ending_controlled",
+      "type": "ending",
+      "title": "与雾达成契约",
+      "endingTag": "行走于雾中者",
+      "text": "你巧妙地改写了仪式，将雾中的存在束缚为镇子的守护者——只要它也被允许偶尔夺走一些“代价”。镇长握住你的手时，眼中闪过难以察觉的恐惧。",
+      "options": []
+    },
+    {
+      "id": "ending_costly",
+      "type": "ending",
+      "title": "付出代价的终结",
+      "endingTag": "交换之人",
+      "text": "你破坏了仪式结构，却被卷入反噬。雾中的存在退回井底，但你知道，自己生命中的某些东西已经被交换走了——记忆、情感，或者别的什么。",
+      "options": []
+    }
+  ]
+}
+
