@@ -1,10 +1,20 @@
 <template>
   <section class="character-sheet" v-if="character">
     <header class="header">
-      <h3>{{ character.name || '未命名角色' }}</h3>
-      <p class="concept">
-        {{ character.concept || '点击下方开始设定你的角色概念' }}
-      </p>
+      <div class="avatar-container">
+        <img
+          :src="playerAvatarUrl"
+          :alt="playerAvatarAlt"
+          class="avatar"
+          @error="onAvatarError"
+        />
+      </div>
+      <div class="header-text">
+        <h3>{{ character.name || '未命名角色' }}</h3>
+        <p class="concept">
+          {{ character.concept || '点击下方开始设定你的角色概念' }}
+        </p>
+      </div>
     </header>
     <div class="abilities">
       <div
@@ -36,13 +46,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useAdventureStore } from '../store/adventureStore';
 import type { AbilityKey } from '../game/engine';
+import { getAvatarUrl, avatars } from '../game/avatars';
 
 const store = useAdventureStore();
 
 const character = computed(() => store.state?.character ?? null);
+
+const playerAvatarUrl = computed(() => getAvatarUrl('player'));
+const playerAvatarAlt = computed(() => avatars.player.alt);
+
+const avatarError = ref(false);
 
 function abilityLabel(key: string): string {
   const map: Record<AbilityKey, string> = {
@@ -55,6 +71,13 @@ function abilityLabel(key: string): string {
   };
   return map[key as AbilityKey] ?? key;
 }
+
+function onAvatarError(event: Event) {
+  avatarError.value = true;
+  const img = event.target as HTMLImageElement;
+  // Fallback to a data URL placeholder on error
+  img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="80" height="80"%3E%3Crect width="80" height="80" fill="%23334155"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23cbd5e1" font-size="32" font-family="sans-serif"%3E?%3C/text%3E%3C/svg%3E';
+}
 </script>
 
 <style scoped>
@@ -64,7 +87,31 @@ function abilityLabel(key: string): string {
   gap: 0.75rem;
 }
 
-.header h3 {
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.avatar-container {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.header-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.header-text h3 {
   margin: 0;
 }
 
