@@ -4,35 +4,36 @@ This directory contains character portrait images used throughout the D&D advent
 
 ## Current Status
 
-⚠️ **The current PNG files are minimal placeholders for development.**
+✅ **Production-ready Dreamina portraits approved for intro-quest adventure**
 
-Replace these with the high-quality AI-generated character portraits for production use.
+These high-quality AI-generated portraits match the dark fantasy theme of the solo D&D experience.
 
-## Required Images
+## Character Portraits
 
-Five character portraits are needed (PNG or WebP format recommended):
+Five character portraits for the intro quest "雾镇的失踪事件" (The Disappearances in Fog Town):
 
 1. **player.png** - Default player adventurer portrait
-   - Used in: Character sheet
+   - Used in: Character sheet throughout the adventure
 
 2. **mayor.png** - Town mayor character
    - Used in: `hook_tavern`, `investigate_mayor` scenes
 
-3. **cloak_figure.png** - Mysterious cloaked figure
+3. **cloak_figure.png** - Mysterious cloaked figure in the tavern
    - Used in: `tavern_clue_success`, `cloak_figure` scenes
 
 4. **dock_youth.png** - Frightened youth at the docks
    - Used in: `dock_response` scene
 
-5. **cultist.png** - Ritual cultist
+5. **cultist.png** - Ritual cultist performing dark ceremonies
    - Used in: `ritual_cave` and all ending scenes
 
 ## Image Specifications
 
-- **Format**: PNG or WebP
-- **Recommended size**: 256×256px minimum (displayed at 48-56px)
-- **Style**: Dark fantasy themed, consistent art style across all portraits
-- **Optimization**: Compress for web delivery (target < 50KB per image)
+- **Format**: PNG
+- **Source**: Dreamina AI art generation
+- **Size**: ~1.6-2.5MB per portrait (high quality)
+- **Style**: Consistent dark fantasy aesthetic with atmospheric fog-town setting
+- **Display**: Rendered at 48-56px in-game with circular crop
 
 ## Asset Path
 
